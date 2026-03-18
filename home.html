@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zanatta Lopes Wealth | Asset Dashboard</title>
+    <!-- Font Awesome (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #1e2b3c;
+            line-height: 1.5;
+        }
+
+        /* Premium header / navigation */
+        header {
+            background-color: #0b1a2a;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            padding: 0.9rem 2.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #2a3b4e;
+        }
+
+        .logo a {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .logo span {
+            font-weight: 300;
+            color: #c9a05e;
+        }
+        .logo i {
+            color: #c9a05e;
+            font-size: 1.8rem;
+            margin-right: 6px;
+        }
+
+        .market-ticker {
+            background: #1f3347;
+            border-radius: 40px;
+            padding: 0.3rem 1.2rem;
+            display: flex;
+            gap: 2rem;
+            color: #b6c8d9;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            border: 1px solid #3e5368;
+        }
+        .market-ticker span {
+            color: #e5b96b;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        .client-area {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+        }
+        .client-area a {
+            color: #e0e7ef;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .client-area a:hover {
+            color: #c9a05e;
+        }
+        .portfolio-badge {
+            background-color: #2a4a6e;
+            border-radius: 30px;
+            padding: 0.4rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: 500;
+            border: 1px solid #5d7c9e;
+        }
+        .portfolio-badge i {
+            color: #e5b96b;
+        }
+
+        /* asset classes nav */
+        .asset-nav {
+            background: #ffffff;
+            padding: 0.6rem 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.2rem;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .asset-nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .asset-nav a i {
+            color: #b9974c;
+            font-size: 0.9rem;
+        }
+        .asset-nav a:hover {
+            color: #b68b40;
+            border-bottom-color: #b9974c;
+        }
+
+        /* main banner - wealth management */
+        .wealth-banner {
+            background: linear-gradient(135deg, #102331 0%, #1f3c5a 100%);
+            margin: 1.8rem 2.5rem;
+            border-radius: 28px;
+            padding: 2.8rem 4rem;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 20px 30px -10px rgba(0,20,40,0.3);
+            border: 1px solid #526e8a;
+        }
+        .banner-texto h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+        }
+        .banner-texto h1 i {
+            color: #e5b96b;
+            margin-right: 10px;
+        }
+        .banner-texto p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.85;
+            max-width: 500px;
+        }
+        .btn-wealth {
+            background: #c9a05e;
+            color: #0b1a2a;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 10px 18px -6px #00000050;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+        .btn-wealth:hover {
+            background: #dbb47a;
+            transform: scale(1.01);
+        }
+        .banner-imagem i {
+            font-size: 7rem;
+            color: rgba(255,215,130,0.25);
+        }
+
+        /* main container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2.5rem 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0 1.5rem;
+        }
+        .section-header h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #132434;
+            letter-spacing: -0.3px;
+            border-left: 5px solid #c9a05e;
+            padding-left: 1rem;
+        }
+        .view-all {
+            color: #b68b40;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        /* asset grid — 4 cards: gold, silver, oil, bitcoin */
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem 1.5rem;
+        }
+        .asset-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease;
+            border: 1px solid #e4e9f0;
+            display: flex;
+            flex-direction: column;
+        }
+        .asset-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 28px -10px rgba(0,35,65,0.12);
+            border-color: #c9a05e80;
+        }
+        .asset-icon {
+            height: 150px;
+            background: #f0f4fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3e566b;
+            font-size: 3.4rem;
+            border-bottom: 1px solid #dee7ef;
+        }
+        .asset-icon i {
+            filter: drop-shadow(2px 4px 6px #bbbbbb40);
+        }
+        /* specific asset icon colors */
+        .asset-card[data-asset="gold"] .asset-icon i { color: #cf9f4a; }
+        .asset-card[data-asset="silver"] .asset-icon i { color: #9aa9b9; }
+        .asset-card[data-asset="oil"] .asset-icon i { color: #2f5e4a; }
+        .asset-card[data-asset="bitcoin"] .asset-icon i { color: #f7931a; }
+
+        .asset-info {
+            padding: 1.2rem 1.2rem 0.8rem;
+            flex: 1;
+        }
+        .asset-class {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #7b8b9f;
+            letter-spacing: 0.8px;
+            font-weight: 500;
+        }
+        .asset-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 0.2rem 0 0.25rem;
+            color: #0b1f2e;
+        }
+        .asset-price {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #132e44;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .price-change {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: #eef3f9;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            color: #2d6e4f;
+        }
+        .price-change.negative {
+            color: #b13e3e;
+            background: #ffe6e6;
+        }
+
+        .asset-footer {
+            padding: 0.8rem 1.2rem 1.2rem;
+            border-top: 1px solid #e7ecf3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-invest {
+            background: #132e44;
+            color: white;
+            border: none;
+            padding: 0.45rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid #2f5577;
+        }
+        .btn-invest:hover {
+            background: #1f4460;
+        }
+        .btn-watch {
+            background: none;
+            border: 1px solid #b9c7da;
+            color: #3d5f82;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .btn-watch:hover {
+            background: #f0f3f8;
+            border-color: #c9a05e;
+            color: #c9a05e;
+        }
+
+        /* research & insights panel (replaces old double banner) */
+        .insight-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin: 3.5rem 0 2rem;
+        }
+        .macro-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2.2rem;
+            border: 1px solid #e2e9f2;
+            box-shadow: 0 5px 8px rgba(0,0,0,0.02);
+        }
+        .macro-card.commodities {
+            background: #fafcfd;
+        }
+        .macro-card.digital {
+            background: #f9fbfe;
+        }
+        .macro-tag {
+            color: #b9974c;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .macro-title {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin: 0.5rem 0 1rem;
+            color: #112233;
+        }
+        .macro-text {
+            color: #3e5569;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .macro-link {
+            color: #132e44;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border-bottom: 1px solid #c9a05e;
+            width: fit-content;
+            padding-bottom: 2px;
+        }
+
+        /* footer */
+        footer {
+            background: #0b1a2a;
+            color: #a3b8cc;
+            padding: 3rem 2.5rem 1.5rem;
+            margin-top: 2.5rem;
+            border-top: 1px solid #263d54;
+        }
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+        }
+        .footer-col h4 {
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col li {
+            margin-bottom: 0.7rem;
+        }
+        .footer-col a {
+            color: #b6c8db;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+        .footer-col a:hover {
+            color: #dbb47a;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 1.4rem;
+            margin-top: 0.5rem;
+        }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #1f364c;
+            margin-top: 2.8rem;
+            padding-top: 1.8rem;
+            font-size: 0.85rem;
+            color: #7a93ab;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .asset-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 800px) {
+            header { flex-direction: column; gap: 1rem; align-items: stretch; }
+            .market-ticker { justify-content: center; }
+            .client-area { justify-content: center; }
+            .wealth-banner { flex-direction: column; text-align: center; padding: 2rem; margin: 1.5rem; }
+            .banner-imagem { margin-top: 2rem; }
+            .insight-panel { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 550px) {
+            .asset-nav { justify-content: center; gap: 1rem; }
+            .asset-grid { grid-template-columns: 1fr; }
+            header, .container { padding-left: 1.2rem; padding-right: 1.2rem; }
+            .wealth-banner { margin-left: 1rem; margin-right: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Wealth Management -->
+    <header>
+        <div class="logo">
+            <a href="#"><i class="fas fa-chart-line"></i>Zanatta Lopes<span>Wealth</span></a>
+        </div>
+        <div class="market-ticker">
+            <span>GOLD <span>$2,358</span></span>
+            <span>SILVER <span>$28.42</span></span>
+            <span>OIL <span>$82.16</span></span>
+            <span>BTC <span>$63,120</span></span>
+        </div>
+        <div class="client-area">
+            <a href="#"><i class="far fa-user-circle"></i> Private Client</a>
+            <div class="portfolio-badge">
+                <i class="fas fa-briefcase"></i> <span>$0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Asset classes navigation -->
+    <nav class="asset-nav">
+        <a href="#"><i class="fas fa-coins"></i> Gold</a>
+        <a href="#"><i class="fas fa-ring"></i> Silver</a>
+        <a href="#"><i class="fas fa-oil-can"></i> Oil</a>
+        <a href="#"><i class="fab fa-bitcoin"></i> Bitcoin</a>
+        <a href="#"><i class="fas fa-chart-pie"></i> Portfolio</a>
+        <a href="#"><i class="fas fa-file-invoice"></i> Research</a>
+    </nav>
+
+    <!-- Main banner - wealth advisory -->
+    <!-- <div class="wealth-banner">
+        <div class="banner-texto">
+            <h1><i class="fas fa-gem"></i> Capital preservation & growth</h1>
+            <p>Diversify with tangible assets: physical gold, silver, oil futures, and digital gold — Bitcoin.</p>
+            <a href="#" class="btn-wealth">Schedule a consultation</a>
+        </div>
+        <div class="banner-imagem">
+            <i class="fas fa-globe-americas"></i>
+        </div>
+    </div> -->
+
+    <!-- Main content: 4 featured assets -->
+    <main class="container">
+        <div class="section-header">
+            <h2>Spot assets · real-time pricing</h2>
+            <a href="#" class="view-all">Allocations <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="asset-grid">
+            <!-- Gold card -->
+            <div class="asset-card" data-asset="gold">
+                <div class="asset-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="asset-info">
+                    <div class="asset-class">COMEX / BULLION</div>
+                    <div class="asset-name">Gold · XAU</div>
+                    <div class="asset-price">$2,358.40 <span class="price-change">+0.6%</span></div>
+                </div>
+                <div class="asset-footer">
+                    <button class="btn-invest"><i class="fas fa-plus-circle"></i> Allocate</button>
+                    <button class="btn-watch" aria-label="Watch"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+            <!-- Silver card -->
+            <div class="asset-card" data-asset="silver">
+                <div class="asset-icon">
+                    <i class="fas fa-ring"></i>
+                </div>
+                <div class="asset-info">
+                    <div class="asset-class">COMEX / SILVER</div>
+                    <div class="asset-name">Silver · XAG</div>
+                    <div class="asset-price">$28.42 <span class="price-change negative">-0.3%</span></div>
+                </div>
+                <div class="asset-footer">
+                    <button class="btn-invest"><i class="fas fa-plus-circle"></i> Allocate</button>
+                    <button class="btn-watch"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+            <!-- Oil card -->
+            <div class="asset-card" data-asset="oil">
+                <div class="asset-icon">
+                    <i class="fas fa-oil-can"></i>
+                </div>
+                <div class="asset-info">
+                    <div class="asset-class">WTI CRUDE</div>
+                    <div class="asset-name">Oil · CL</div>
+                    <div class="asset-price">$82.16 <span class="price-change">+1.2%</span></div>
+                </div>
+                <div class="asset-footer">
+                    <button class="btn-invest"><i class="fas fa-plus-circle"></i> Allocate</button>
+                    <button class="btn-watch"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+            <!-- Bitcoin card -->
+            <div class="asset-card" data-asset="bitcoin">
+                <div class="asset-icon">
+                    <i class="fab fa-bitcoin"></i>
+                </div>
+                <div class="asset-info">
+                    <div class="asset-class">DIGITAL</div>
+                    <div class="asset-name">Bitcoin · BTC</div>
+                    <div class="asset-price">$63,120 <span class="price-change">+2.4%</span></div>
+                </div>
+                <div class="asset-footer">
+                    <button class="btn-invest"><i class="fas fa-plus-circle"></i> Allocate</button>
+                    <button class="btn-watch"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insight panel (instead of old category banners) -->
+        <!-- <div class="insight-panel">
+            <div class="macro-card commodities">
+                <div class="macro-tag">MACRO OUTLOOK Q2</div>
+                <div class="macro-title">Commodities supercycle</div>
+                <div class="macro-text">Gold and silver remain hedges against monetary expansion. Oil faces supply constraints. Physical allocation recommended.</div>
+                <a href="#" class="macro-link">Read report <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="macro-card digital">
+                <div class="macro-tag">DIGITAL ASSETS</div>
+                <div class="macro-title">Bitcoin as portfolio diversifier</div>
+                <div class="macro-text">Institutional adoption grows. We analyze optimal on-chain allocation for HNW clients.</div>
+                <a href="#" class="macro-link">Research note <i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div> -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Wealth Management</h4>
+                <ul>
+                    <li><a href="#">Asset allocation</a></li>
+                    <li><a href="#">Precious metals</a></li>
+                    <li><a href="#">Energy futures</a></li>
+                    <li><a href="#">Digital assets</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Insights</h4>
+                <ul>
+                    <li><a href="#">Daily market brief</a></li>
+                    <li><a href="#">Macro research</a></li>
+                    <li><a href="#">Webinars</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Zanatta Lopes</h4>
+                <ul>
+                    <li><a href="#">Client portal</a></li>
+                    <li><a href="#">Advisors</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Zanatta Lopes Wealth Partners. All rights reserved. | Fortitude & stability.
+        </div>
+    </footer>
+</body>
+</html>
